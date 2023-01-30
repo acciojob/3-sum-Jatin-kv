@@ -1,26 +1,51 @@
 function threeSum(arr, target) {
   //your code here
-  let i
-	let j
-	let k
-	const mindiff = []
-	for(i=0;i<arr.length;i++){
-		for(j=i+1;j<arr.length;j++){
-			for(k=j+1;k<arr.length;k++){
-				let sum = arr[i]+arr[j]+arr[k]
-				diff = sum - target
-				mindiff.push(Math.abs(diff))
-			}
-		}
-	}
-	let min = mindiff[0]
-	let p
-	for(p=1;p<mindiff.length;p++){
-	  if(min > mindiff[p]){
-	    min = mindiff[p]
-	  }
-	}
-	return min
+  arr.sort((a, b) => a - b);
+ 
+  // To store the closest sum
+ // not using INT_MAX to avoid
+ // overflowing condition
+  let closestSum = Number.MAX_VALUE;
+
+  // Fix the smallest number among
+  // the three integers
+  for (let i = 0; i < arr.length - 2; i++)
+  {
+
+      // Two pointers initially pointing at
+      // the last and the element
+      // next to the fixed element
+      let ptr1 = i + 1, ptr2 = arr.length - 1;
+
+      // While there could be more pairs to check
+      while (ptr1 < ptr2) {
+
+          // Calculate the sum of the current triplet
+          let sum = arr[i] + arr[ptr1] + arr[ptr2];
+
+          // If the sum is more closer than
+          // the current closest sum
+          if (Math.abs(1*x - sum) < Math.abs(1*x - closestSum))
+          {
+              closestSum = sum;
+          }
+
+          // If sum is greater than x then decrement
+          // the second pointer to get a smaller sum
+          if (sum > x) {
+              ptr2--;
+          }
+
+          // Else increment the first pointer
+          // to get a larger sum
+          else {
+              ptr1++;
+          }
+      }
+  }
+
+  // Return the closest sum found
+  return closestSum;
 }
 
 module.exports = threeSum;
